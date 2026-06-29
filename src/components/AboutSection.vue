@@ -29,7 +29,7 @@
           <p>全国大会<br/>入賞実績</p>
         </div>
 
-        <div class="about__card about__card--bot">
+        <div class="about__card about__card--bot reveal reveal-delay-2">
           <div class="about__progress-label">継続率</div>
           <div class="about__progress-bar">
             <div class="about__progress-fill"></div>
@@ -232,14 +232,13 @@ const values = [
 }
 .about__progress-fill {
   height: 100%;
-  width: 98%;
+  width: 0;
   background: linear-gradient(90deg, var(--pink-dark), var(--pink), var(--gold));
   border-radius: 2px;
-  animation: progressIn 1.5s var(--ease-expo) both;
-  animation-play-state: paused;
+  transition: width 1.4s var(--ease-expo);
 }
-.is-visible .about__progress-fill {
-  animation-play-state: running;
+.about__card--bot.is-visible .about__progress-fill {
+  width: 98%;
 }
 @keyframes progressIn {
   from { width: 0; }
@@ -322,7 +321,15 @@ const values = [
 }
 
 @media (max-width: 960px) {
-  .about__inner { grid-template-columns: 1fr; gap: 60px; }
-  .about__grid { max-width: 480px; margin: 0 auto; }
+  .about__inner { grid-template-columns: 1fr; gap: 48px; }
+  .about__grid { max-width: 480px; margin: 0 auto; width: 100%; }
+  .about__deco-text { font-size: clamp(80px, 20vw, 160px); }
+}
+
+@media (max-width: 480px) {
+  .about__card--main { min-height: 160px; }
+  .about__card-num { font-size: 52px; }
+  .about__card-big { font-size: 36px; }
+  .about__grid { gap: 8px; }
 }
 </style>

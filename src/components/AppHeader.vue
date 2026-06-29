@@ -164,20 +164,31 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 @media (max-width: 960px) {
-  .hamburger { display: flex; }
+  .hamburger { display: flex; position: relative; z-index: 300; }
   .nav {
     position: fixed;
     inset: 0;
     background: var(--deep);
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 48px;
     transform: translateX(100%);
     transition: transform .5s var(--ease-expo);
+    z-index: 200;
+    /* iOS safe area */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
   }
   .nav--open { transform: translateX(0); }
-  .nav__list { flex-direction: column; gap: 28px; }
-  .nav__link { font-size: 20px; letter-spacing: 0.08em; color: rgba(255,255,255,.7); }
-  .nav__cta { font-size: 16px; padding: 14px 48px; }
+  .nav__list { flex-direction: column; gap: 28px; align-items: center; }
+  .nav__link { font-size: 22px; letter-spacing: 0.06em; color: rgba(255,255,255,.7); }
+  .nav__link-num { display: none; }
+  .nav__cta { font-size: 15px; padding: 14px 48px; }
+}
+
+@media (max-width: 480px) {
+  .logo__en { font-size: 16px; }
+  .logo__mark { width: 28px; height: 28px; }
 }
 </style>

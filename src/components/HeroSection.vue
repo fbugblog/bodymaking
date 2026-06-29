@@ -139,10 +139,11 @@ const stats = [
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding-top: 90px;
+  padding-top: 80px;
 }
 
 /* Mesh background */
@@ -209,7 +210,7 @@ const stats = [
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
-  min-height: calc(100vh - 90px);
+  min-height: calc(100dvh - 80px);
   padding-top: 40px;
   padding-bottom: 100px;
 }
@@ -443,10 +444,19 @@ const stats = [
 }
 
 @media (max-width: 960px) {
-  .hero__inner { grid-template-columns: 1fr; text-align: center; }
-  .hero__eyebrow, .hero__stats { justify-content: center; }
+  .hero__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 24px;
+    padding-bottom: 80px;
+    min-height: calc(100dvh - 70px);
+  }
+  .hero__eyebrow { justify-content: center; }
+  .hero__stats { justify-content: center; gap: 24px; }
   .hero__sub { margin-left: auto; margin-right: auto; }
   .hero__actions { justify-content: center; }
   .hero__visual { display: none; }
+  .hero__title { font-size: clamp(38px, 10vw, 56px); }
+  .hero__scroll { bottom: 20px; }
 }
 </style>

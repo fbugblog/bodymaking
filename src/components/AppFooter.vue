@@ -226,7 +226,15 @@ const navCols = [
     gap: 40px;
     padding: 48px 0;
   }
+  .footer__nav { grid-template-columns: repeat(2, 1fr); }
   .footer__side { align-items: flex-start; }
-  .footer__bottom { flex-direction: column; gap: 16px; }
+  .footer__bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .footer__bottom-links { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .footer__nav { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .footer__logo { font-size: 22px; }
+  .footer__inner { padding: 36px 0; }
 }
 </style>

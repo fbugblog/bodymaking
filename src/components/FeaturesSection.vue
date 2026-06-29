@@ -247,14 +247,20 @@ const features = [
 }
 
 @media (max-width: 960px) {
-  .features__top { grid-template-columns: 1fr; }
+  .features__top { grid-template-columns: 1fr; gap: 20px; margin-bottom: 48px; }
   .features__items { grid-template-columns: repeat(2, 1fr); }
   .feat-item:nth-child(3n) { border-right: 1px solid rgba(255,255,255,0.06); }
   .feat-item:nth-child(2n) { border-right: none; }
-  .features__cta { grid-template-columns: 1fr; gap: 32px; padding: 48px 36px; }
+  .feat-item:nth-child(5), .feat-item:nth-child(6) { border-bottom: none; }
+  .feat-item:nth-child(4) { border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .features__cta { grid-template-columns: 1fr; gap: 32px; padding: 40px 32px; }
 }
+
 @media (max-width: 600px) {
   .features__items { grid-template-columns: 1fr; }
-  .feat-item { border-right: none; }
+  .feat-item { border-right: none !important; padding: 32px 24px; }
+  .feat-item:nth-child(n) { border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .feat-item:last-child { border-bottom: none; }
+  .features__cta { padding: 32px 24px; border-radius: 20px; }
 }
 </style>

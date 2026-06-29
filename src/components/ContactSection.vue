@@ -97,7 +97,7 @@ function submit() {
 
 <style scoped>
 .contact {
-  padding: clamp(100px, 12vw, 160px) 0;
+  padding: clamp(80px, 10vw, 160px) 0;
   background: var(--black);
   position: relative;
   overflow: hidden;
@@ -306,8 +306,15 @@ function submit() {
 .form-submit__text { position: relative; z-index: 1; }
 
 @media (max-width: 960px) {
-  .contact__inner { grid-template-columns: 1fr; gap: 60px; }
+  .contact__inner { grid-template-columns: 1fr; gap: 48px; }
+  .contact__deco { display: none; }
   .form-row--2 { grid-template-columns: 1fr; }
-  .form-card { padding: 36px 28px; }
+  .form-card { padding: 32px 24px; }
+  .contact__text { margin-bottom: 32px; }
+}
+
+@media (max-width: 480px) {
+  .form-card { padding: 28px 20px; }
+  .form-submit { font-size: 13px; padding: 16px; }
 }
 </style>

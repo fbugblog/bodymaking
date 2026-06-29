@@ -47,35 +47,19 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  cursor: none;
+}
+
+/* Custom cursor — only on pointer:fine devices (mouse/trackpad) */
+@media (pointer: fine) {
+  body { cursor: none; }
+  a, button { cursor: none; }
 }
 
 a { color: inherit; text-decoration: none; }
 button { cursor: none; border: none; background: none; font-family: inherit; }
 img { max-width: 100%; display: block; }
 
-/* ── Custom Cursor ─────────────────────────────────────── */
-.cursor {
-  position: fixed;
-  top: 0; left: 0;
-  width: 10px; height: 10px;
-  background: var(--pink);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width .3s var(--ease-expo), height .3s var(--ease-expo), background .3s;
-  mix-blend-mode: difference;
-}
-.cursor--ring {
-  width: 36px; height: 36px;
-  background: transparent;
-  border: 1px solid rgba(233, 30, 140, 0.5);
-  transition: width .5s var(--ease-expo), height .5s var(--ease-expo),
-              transform .1s linear, border-color .3s;
-}
-.cursor--hover .cursor { width: 48px; height: 48px; }
-.cursor--hover .cursor--ring { width: 56px; height: 56px; border-color: var(--pink); }
+/* Cursor styles are defined in App.vue <style> (global) */
 
 /* ── Noise Overlay ─────────────────────────────────────── */
 .noise {
