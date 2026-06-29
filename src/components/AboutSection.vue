@@ -1,49 +1,67 @@
 <template>
   <section id="about" class="about">
-    <div class="container">
-      <div class="about__inner">
-        <div class="about__visual">
-          <div class="about__card about__card--main">
-            <div class="about__card-icon">
-              <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="30" cy="20" r="10" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M15 45 C15 35 22 28 30 28 C38 28 45 35 45 45" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M8 38 C8 30 14 24 22 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-                <path d="M52 38 C52 30 46 24 38 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-              </svg>
-            </div>
-            <p class="about__card-text">少人数制で<br />丁寧な指導</p>
+    <!-- Big decorative text -->
+    <div class="about__deco-text" aria-hidden="true">GRACE</div>
+
+    <div class="container about__inner">
+      <!-- Left: visual grid -->
+      <div class="about__grid reveal--left reveal">
+        <div class="about__card about__card--main">
+          <div class="about__card-bg"></div>
+          <div class="about__card-content">
+            <p class="about__card-num grad-text">15</p>
+            <p class="about__card-unit">Years</p>
+            <p class="about__card-desc">of Excellence</p>
           </div>
-          <div class="about__card about__card--sub1">
-            <span class="about__card-num">10+</span>
-            <span class="about__card-desc">種類のクラス</span>
-          </div>
-          <div class="about__card about__card--sub2">
-            <span class="about__card-accent">✦</span>
-            <span>全国大会<br />入賞実績</span>
-          </div>
-          <div class="about__deco-circle"></div>
         </div>
 
-        <div class="about__content">
-          <p class="section-label">About Studio Grace</p>
-          <h2 class="section-title">
-            体を動かすことを<br />
-            <em>もっと楽しく、美しく。</em>
-          </h2>
-          <p class="about__text">
-            Studio Graceは、ボディメイキングと新体操を専門とする教室です。子どもから大人まで、それぞれの目標に合わせたプログラムを提供しています。
-          </p>
-          <p class="about__text">
-            経験豊富なコーチ陣が、基礎から丁寧に指導。美しい姿勢と体幹を鍛えながら、しなやかな動きを習得できます。競技志向の方から、健康・美容目的の方まで幅広く対応しています。
-          </p>
-          <div class="about__values">
-            <div class="about__value" v-for="v in values" :key="v.title">
-              <span class="about__value-icon">{{ v.icon }}</span>
-              <div>
-                <strong class="about__value-title">{{ v.title }}</strong>
-                <p class="about__value-desc">{{ v.desc }}</p>
-              </div>
+        <div class="about__card about__card--top">
+          <div class="about__card-label">在籍生徒数</div>
+          <div class="about__card-big">200<span class="plus">+</span></div>
+        </div>
+
+        <div class="about__card about__card--mid">
+          <div class="about__icon-row">
+            <span class="icon">🏆</span>
+            <span class="icon">🥇</span>
+            <span class="icon">🌸</span>
+          </div>
+          <p>全国大会<br/>入賞実績</p>
+        </div>
+
+        <div class="about__card about__card--bot">
+          <div class="about__progress-label">継続率</div>
+          <div class="about__progress-bar">
+            <div class="about__progress-fill"></div>
+          </div>
+          <div class="about__progress-val">98%</div>
+        </div>
+
+        <!-- Decorative lines -->
+        <div class="about__cross" aria-hidden="true"></div>
+      </div>
+
+      <!-- Right: text -->
+      <div class="about__text-col">
+        <p class="s-label reveal">About Studio Grace</p>
+        <h2 class="about__title reveal reveal-delay-1">
+          体を動かすことを<br />
+          もっと<span class="grad-text">楽しく、</span><br />
+          <em class="about__title-em">美しく。</em>
+        </h2>
+        <p class="about__body reveal reveal-delay-2">
+          Studio Graceは、ボディメイキングと新体操を専門とする教室です。子どもから大人まで、それぞれの目標に合わせたプログラムを提供しています。
+        </p>
+        <p class="about__body reveal reveal-delay-3">
+          経験豊富なコーチ陣が基礎から丁寧に指導。美しい姿勢と体幹を鍛えながら、しなやかな動きを習得できます。
+        </p>
+
+        <div class="about__values">
+          <div class="about__value reveal" v-for="(v, i) in values" :key="v.title" :class="`reveal-delay-${i+2}`">
+            <div class="about__value-icon">{{ v.icon }}</div>
+            <div>
+              <strong class="about__value-title">{{ v.title }}</strong>
+              <p class="about__value-desc">{{ v.desc }}</p>
             </div>
           </div>
         </div>
@@ -62,9 +80,26 @@ const values = [
 
 <style scoped>
 .about {
-  padding: var(--section-padding) 0;
-  background: var(--pink-50);
+  position: relative;
+  padding: clamp(100px, 12vw, 160px) 0;
+  background: var(--deep);
   overflow: hidden;
+}
+
+.about__deco-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-serif);
+  font-size: clamp(120px, 18vw, 260px);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(233,30,140,0.05);
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
 }
 
 .about__inner {
@@ -72,198 +107,222 @@ const values = [
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
-/* Visual */
-.about__visual {
+/* Card grid */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 12px;
   position: relative;
-  height: 500px;
 }
 
 .about__card {
-  position: absolute;
-  background: white;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.06);
   border-radius: 20px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.06);
   padding: 28px;
+  transition: border-color .3s, transform .4s var(--ease-expo);
+  position: relative;
+  overflow: hidden;
+}
+.about__card:hover {
+  border-color: rgba(233,30,140,0.25);
+  transform: translateY(-4px);
 }
 
 .about__card--main {
-  top: 0;
-  left: 0;
-  right: 20%;
-  bottom: 20%;
-  background: linear-gradient(135deg, var(--pink-600) 0%, var(--pink-800) 100%);
-  color: white;
+  grid-column: 1;
+  grid-row: 1 / 3;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 16px;
+  gap: 4px;
+  min-height: 220px;
+  background: linear-gradient(160deg, #1E0818 0%, #0D0610 100%);
+  border-color: rgba(233,30,140,0.12);
 }
-
-.about__card-icon {
-  width: 52px;
-  height: 52px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.about__card-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 70%, rgba(233,30,140,0.15) 0%, transparent 65%);
+  pointer-events: none;
 }
-
-.about__card-icon svg {
-  width: 32px;
-  height: 32px;
-  color: white;
-}
-
-.about__card-text {
+.about__card-content { position: relative; }
+.about__card-num {
   font-family: var(--font-serif);
-  font-size: 22px;
+  font-size: 72px;
   font-weight: 300;
-  line-height: 1.4;
-  letter-spacing: 0.04em;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.about__card-unit {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.1em;
+}
+.about__card-desc {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.25);
+  text-transform: uppercase;
 }
 
-.about__card--sub1 {
-  bottom: 0;
-  right: 0;
-  width: 48%;
-  height: 35%;
+.about__card--top {
+  grid-column: 2;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 4px;
 }
-
-.about__card-num {
+.about__card-label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+}
+.about__card-big {
   font-family: var(--font-serif);
   font-size: 48px;
   font-weight: 300;
-  color: var(--pink-600);
+  color: white;
   line-height: 1;
 }
+.plus { font-size: 28px; color: var(--pink); }
 
-.about__card-desc {
-  font-size: 12px;
-  color: var(--gray-600);
-  letter-spacing: 0.06em;
+.about__card--mid {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.6);
+}
+.about__icon-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-size: 20px;
 }
 
-.about__card--sub2 {
-  top: 45%;
-  right: 0;
-  width: 44%;
-  height: 24%;
+.about__card--bot {
+  grid-column: 1 / 3;
+  grid-row: 3;
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--gray-700, #404040);
+  gap: 16px;
+  padding: 20px 28px;
+}
+.about__progress-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.3);
+  white-space: nowrap;
+}
+.about__progress-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.about__progress-fill {
+  height: 100%;
+  width: 98%;
+  background: linear-gradient(90deg, var(--pink-dark), var(--pink), var(--gold));
+  border-radius: 2px;
+  animation: progressIn 1.5s var(--ease-expo) both;
+  animation-play-state: paused;
+}
+.is-visible .about__progress-fill {
+  animation-play-state: running;
+}
+@keyframes progressIn {
+  from { width: 0; }
+}
+.about__progress-val {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--pink-light);
 }
 
-.about__card-accent {
-  color: var(--gold-400);
-  font-size: 18px;
-  flex-shrink: 0;
-}
-
-.about__deco-circle {
+.about__cross {
   position: absolute;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: 1px solid var(--pink-200);
-  bottom: -40px;
-  left: -40px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px; height: 16px;
   pointer-events: none;
 }
-
-/* Content */
-.about__content {
-  padding: 20px 0;
+.about__cross::before,
+.about__cross::after {
+  content: '';
+  position: absolute;
+  background: rgba(233,30,140,0.2);
 }
+.about__cross::before { width: 1px; height: 100%; left: 50%; }
+.about__cross::after  { width: 100%; height: 1px; top: 50%; }
 
-.section-label {
+/* Text column */
+.about__title {
   font-family: var(--font-serif);
-  font-size: 12px;
+  font-size: clamp(30px, 3.5vw, 52px);
   font-weight: 300;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--pink-500);
-  margin-bottom: 20px;
-}
-
-.section-title {
-  font-family: var(--font-serif);
-  font-size: clamp(28px, 3vw, 42px);
-  font-weight: 300;
-  line-height: 1.4;
+  line-height: 1.3;
   letter-spacing: 0.02em;
-  color: var(--gray-900);
   margin-bottom: 28px;
 }
-
-.section-title em {
+.about__title-em {
   font-style: italic;
-  color: var(--pink-600);
-  font-weight: 300;
+  display: block;
+  color: rgba(255,255,255,0.5);
 }
 
-.about__text {
-  font-size: 15px;
+.about__body {
+  font-size: 14px;
   line-height: 2;
-  color: var(--gray-600);
-  margin-bottom: 20px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 16px;
 }
 
 .about__values {
+  margin-top: 36px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-top: 36px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(255,255,255,0.06);
 }
-
 .about__value {
   display: flex;
-  align-items: flex-start;
   gap: 16px;
+  align-items: flex-start;
 }
-
 .about__value-icon {
-  color: var(--pink-400);
+  color: var(--pink);
   font-size: 14px;
   margin-top: 2px;
   flex-shrink: 0;
 }
-
 .about__value-title {
-  font-size: 14px;
-  font-weight: 600;
   display: block;
-  margin-bottom: 2px;
-  color: var(--gray-800);
-}
-
-.about__value-desc {
   font-size: 13px;
-  color: var(--gray-500, #737373);
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 3px;
+}
+.about__value-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
   line-height: 1.6;
 }
 
-@media (max-width: 900px) {
-  .about__inner {
-    grid-template-columns: 1fr;
-    gap: 60px;
-  }
-
-  .about__visual {
-    height: 340px;
-    max-width: 400px;
-    margin: 0 auto;
-  }
+@media (max-width: 960px) {
+  .about__inner { grid-template-columns: 1fr; gap: 60px; }
+  .about__grid { max-width: 480px; margin: 0 auto; }
 }
 </style>

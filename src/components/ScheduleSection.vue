@@ -2,34 +2,26 @@
   <section id="schedule" class="schedule">
     <div class="container">
       <div class="schedule__header">
-        <p class="section-label">Schedule</p>
-        <h2 class="section-title">スケジュール</h2>
-        <p class="schedule__subtitle">お好きな時間帯のクラスをお選びください。</p>
+        <p class="s-label reveal">Schedule</p>
+        <h2 class="schedule__title reveal reveal-delay-1">週間スケジュール</h2>
+        <p class="schedule__sub reveal reveal-delay-2">お好きな時間帯のクラスをお選びください。</p>
       </div>
 
-      <div class="schedule__table-wrap">
-        <table class="schedule__table">
+      <div class="schedule__wrap reveal">
+        <table class="sched-table">
           <thead>
             <tr>
-              <th class="schedule__th schedule__th--time">時間</th>
-              <th class="schedule__th" v-for="day in days" :key="day">{{ day }}</th>
+              <th class="sched-table__th sched-table__th--time">時間</th>
+              <th class="sched-table__th" v-for="d in days" :key="d">{{ d }}</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="row in schedule" :key="row.time">
-              <td class="schedule__td schedule__td--time">{{ row.time }}</td>
-              <td
-                class="schedule__td"
-                v-for="day in days"
-                :key="day"
-              >
-                <div
-                  v-if="row.cells[day]"
-                  class="schedule__cell"
-                  :class="`schedule__cell--${row.cells[day].color}`"
-                >
-                  <span class="schedule__cell-name">{{ row.cells[day].name }}</span>
-                  <span class="schedule__cell-age">{{ row.cells[day].age }}</span>
+            <tr v-for="row in rows" :key="row.time" class="sched-table__row">
+              <td class="sched-table__td sched-table__td--time">{{ row.time }}</td>
+              <td class="sched-table__td" v-for="d in days" :key="d">
+                <div v-if="row.cells[d]" class="sched-cell" :class="`sched-cell--${row.cells[d].theme}`">
+                  <span class="sched-cell__name">{{ row.cells[d].name }}</span>
+                  <span class="sched-cell__age">{{ row.cells[d].age }}</span>
                 </div>
               </td>
             </tr>
@@ -37,14 +29,14 @@
         </table>
       </div>
 
-      <div class="schedule__legend">
-        <div class="schedule__legend-item" v-for="l in legend" :key="l.label">
-          <span class="schedule__legend-dot" :class="`schedule__legend-dot--${l.color}`"></span>
+      <div class="schedule__legend reveal">
+        <div class="legend-item" v-for="l in legend" :key="l.label">
+          <span class="legend-dot" :class="`legend-dot--${l.theme}`"></span>
           <span>{{ l.label }}</span>
         </div>
       </div>
 
-      <p class="schedule__note">
+      <p class="schedule__note reveal">
         ※ スケジュールは変更になる場合があります。最新情報はお問い合わせください。
       </p>
     </div>
@@ -52,217 +44,178 @@
 </template>
 
 <script setup>
-const days = ['月', '火', '水', '木', '金', '土', '日']
+const days = ['月','火','水','木','金','土','日']
 
-const schedule = [
-  {
-    time: '10:00〜11:00',
-    cells: {
-      '月': { name: 'ボディメイキング', age: '大人', color: 'dark' },
-      '水': { name: 'ボディメイキング', age: '大人', color: 'dark' },
-      '金': { name: '大人の新体操', age: '18歳〜', color: 'light' },
-      '土': { name: 'ジュニア基礎', age: '4〜7歳', color: 'pink' },
-      '日': { name: 'ジュニア基礎', age: '4〜7歳', color: 'pink' },
-    },
-  },
-  {
-    time: '14:00〜15:00',
-    cells: {
-      '水': { name: 'ジュニア初級', age: '6〜12歳', color: 'pink' },
-      '木': { name: 'ジュニア中級', age: '6〜15歳', color: 'pink' },
-      '土': { name: 'ジュニア中級', age: '6〜15歳', color: 'pink' },
-      '日': { name: '大人の新体操', age: '18歳〜', color: 'light' },
-    },
-  },
-  {
-    time: '16:00〜17:30',
-    cells: {
-      '火': { name: '競技クラス', age: '6歳〜', color: 'gold' },
-      '木': { name: '競技クラス', age: '6歳〜', color: 'gold' },
-      '土': { name: '競技クラス', age: '6歳〜', color: 'gold' },
-    },
-  },
-  {
-    time: '19:00〜20:00',
-    cells: {
-      '月': { name: '大人の新体操', age: '18歳〜', color: 'light' },
-      '火': { name: 'ボディメイキング', age: '大人', color: 'dark' },
-      '木': { name: 'ボディメイキング', age: '大人', color: 'dark' },
-      '金': { name: 'ボディメイキング', age: '大人', color: 'dark' },
-    },
-  },
+const rows = [
+  { time: '10:00〜11:00', cells: {
+    '月': { name:'ボディメイキング', age:'大人', theme:'c' },
+    '水': { name:'ボディメイキング', age:'大人', theme:'c' },
+    '金': { name:'大人の新体操', age:'18歳〜', theme:'d' },
+    '土': { name:'ジュニア基礎', age:'4〜7歳', theme:'a' },
+    '日': { name:'ジュニア基礎', age:'4〜7歳', theme:'a' },
+  }},
+  { time: '14:00〜15:00', cells: {
+    '水': { name:'ジュニア初級', age:'6〜12歳', theme:'a' },
+    '木': { name:'ジュニア中級', age:'6〜15歳', theme:'a' },
+    '土': { name:'ジュニア中級', age:'6〜15歳', theme:'a' },
+    '日': { name:'大人の新体操', age:'18歳〜', theme:'d' },
+  }},
+  { time: '16:00〜17:30', cells: {
+    '火': { name:'競技クラス', age:'6歳〜', theme:'b' },
+    '木': { name:'競技クラス', age:'6歳〜', theme:'b' },
+    '土': { name:'競技クラス', age:'6歳〜', theme:'b' },
+  }},
+  { time: '19:00〜20:00', cells: {
+    '月': { name:'大人の新体操', age:'18歳〜', theme:'d' },
+    '火': { name:'ボディメイキング', age:'大人', theme:'c' },
+    '木': { name:'ボディメイキング', age:'大人', theme:'c' },
+    '金': { name:'ボディメイキング', age:'大人', theme:'c' },
+  }},
 ]
 
 const legend = [
-  { color: 'pink', label: '新体操ジュニア' },
-  { color: 'gold', label: '競技クラス' },
-  { color: 'dark', label: 'ボディメイキング' },
-  { color: 'light', label: '大人の新体操' },
+  { theme: 'a', label: '新体操ジュニア' },
+  { theme: 'b', label: '競技クラス' },
+  { theme: 'c', label: 'ボディメイキング' },
+  { theme: 'd', label: '大人の新体操' },
 ]
 </script>
 
 <style scoped>
 .schedule {
-  padding: var(--section-padding) 0;
-  background: var(--pink-50);
+  padding: clamp(100px, 12vw, 160px) 0;
+  background: var(--deep);
+  position: relative;
+}
+.schedule::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 39px,
+    rgba(255,255,255,0.008) 40px
+  );
+  pointer-events: none;
 }
 
-.schedule__header {
-  text-align: center;
-  margin-bottom: 56px;
-}
-
-.section-label {
+.schedule__header { margin-bottom: 56px; }
+.schedule__title {
   font-family: var(--font-serif);
-  font-size: 12px;
+  font-size: clamp(28px, 3.5vw, 48px);
   font-weight: 300;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--pink-500);
-  margin-bottom: 16px;
-  display: block;
+  margin-bottom: 14px;
+}
+.schedule__sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
 }
 
-.section-title {
-  font-family: var(--font-serif);
-  font-size: clamp(28px, 3vw, 42px);
-  font-weight: 300;
-  letter-spacing: 0.04em;
-  color: var(--gray-900);
-  margin-bottom: 16px;
-}
-
-.schedule__subtitle {
-  font-size: 15px;
-  color: var(--gray-500, #737373);
-}
-
-.schedule__table-wrap {
+.schedule__wrap {
   overflow-x: auto;
+  border: 1px solid rgba(255,255,255,0.06);
   border-radius: 20px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  background: white;
+  background: var(--surface);
 }
 
-.schedule__table {
+.sched-table {
   width: 100%;
   border-collapse: collapse;
   min-width: 700px;
 }
 
-.schedule__th {
+.sched-table__th {
   padding: 16px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--gray-500, #737373);
-  text-align: center;
-  background: white;
-  border-bottom: 1px solid var(--gray-100);
-}
-
-.schedule__th--time {
-  text-align: left;
-  padding-left: 24px;
-  min-width: 130px;
-}
-
-.schedule__td {
-  padding: 12px 8px;
-  border-bottom: 1px solid var(--gray-100);
-  vertical-align: middle;
-  text-align: center;
-}
-
-.schedule__td--time {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
-  color: var(--gray-600);
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.25);
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.sched-table__th--time {
   text-align: left;
-  padding-left: 24px;
-  white-space: nowrap;
+  padding-left: 28px;
+  min-width: 140px;
 }
 
-.schedule__cell {
+.sched-table__row:hover td { background: rgba(255,255,255,0.015); }
+.sched-table__td {
+  padding: 12px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  text-align: center;
+  vertical-align: middle;
+  transition: background .2s;
+}
+.sched-table__td--time {
+  text-align: left;
+  padding-left: 28px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  white-space: nowrap;
+  font-weight: 500;
+}
+.sched-table__row:last-child td { border-bottom: none; }
+
+.sched-cell {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 8px 10px;
+  padding: 9px 12px;
   border-radius: 10px;
   align-items: center;
+  border: 1px solid transparent;
+  transition: transform .25s var(--ease-back);
 }
+.sched-cell:hover { transform: scale(1.03); }
 
-.schedule__cell--pink {
-  background: var(--pink-50);
-  border: 1px solid var(--pink-200);
-}
+.sched-cell--a { background: rgba(233,30,140,0.1); border-color: rgba(233,30,140,0.2); }
+.sched-cell--b { background: rgba(201,169,110,0.1); border-color: rgba(201,169,110,0.2); }
+.sched-cell--c { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+.sched-cell--d { background: rgba(255,107,193,0.08); border-color: rgba(255,107,193,0.15); }
 
-.schedule__cell--gold {
-  background: var(--gold-100);
-  border: 1px solid var(--gold-200);
-}
-
-.schedule__cell--dark {
-  background: #1a0a12;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.schedule__cell--light {
-  background: var(--pink-100);
-  border: 1px solid var(--pink-200);
-}
-
-.schedule__cell-name {
+.sched-cell__name {
   font-size: 11px;
   font-weight: 600;
   line-height: 1.3;
 }
+.sched-cell--a .sched-cell__name { color: var(--pink-light); }
+.sched-cell--b .sched-cell__name { color: var(--gold-light); }
+.sched-cell--c .sched-cell__name { color: rgba(255,255,255,0.7); }
+.sched-cell--d .sched-cell__name { color: #FFB3DC; }
 
-.schedule__cell--pink .schedule__cell-name { color: var(--pink-700); }
-.schedule__cell--gold .schedule__cell-name { color: var(--gold-600); }
-.schedule__cell--dark .schedule__cell-name { color: rgba(255,255,255,0.85); }
-.schedule__cell--light .schedule__cell-name { color: var(--pink-800); }
-
-.schedule__cell-age {
+.sched-cell__age {
   font-size: 10px;
-  opacity: 0.6;
-  color: inherit;
+  color: rgba(255,255,255,0.3);
 }
-
-.schedule__cell--dark .schedule__cell-age { color: rgba(255,255,255,0.5); }
 
 .schedule__legend {
   display: flex;
   gap: 28px;
-  justify-content: center;
   flex-wrap: wrap;
-  margin-top: 28px;
+  margin-top: 24px;
 }
-
-.schedule__legend-item {
+.legend-item {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 12px;
-  color: var(--gray-600);
+  color: rgba(255,255,255,0.4);
 }
-
-.schedule__legend-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
+.legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 2px;
   flex-shrink: 0;
 }
-
-.schedule__legend-dot--pink { background: var(--pink-400); }
-.schedule__legend-dot--gold { background: var(--gold-400); }
-.schedule__legend-dot--dark { background: #3d1230; }
-.schedule__legend-dot--light { background: var(--pink-300); }
+.legend-dot--a { background: var(--pink); }
+.legend-dot--b { background: var(--gold); }
+.legend-dot--c { background: rgba(255,255,255,0.3); }
+.legend-dot--d { background: #FFB3DC; }
 
 .schedule__note {
-  text-align: center;
-  font-size: 12px;
-  color: var(--gray-400);
   margin-top: 20px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
 }
 </style>
